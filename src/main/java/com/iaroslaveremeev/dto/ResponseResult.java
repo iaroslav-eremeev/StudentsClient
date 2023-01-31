@@ -6,15 +6,19 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class ResponseResult<T> {
     private boolean result;
     private String message;
-    private T object;
+    private T data;
 
-    public ResponseResult(boolean result, String message, T object) {
-        this.result = result;
-        this.message = message;
-        this.object = object;
+    public ResponseResult(T data) {
+        this.result = true;
+        this.message = null;
+        this.data = data;
     }
 
-    public ResponseResult() {
+    // Constructor for error Responses
+    public ResponseResult(String errorMessage){
+        this.result = false;
+        this.message = errorMessage;
+        this.data = null;
     }
 
     public boolean isResult() {
@@ -33,12 +37,11 @@ public class ResponseResult<T> {
         this.message = message;
     }
 
-    public T getObject() {
-        return object;
+    public T getData() {
+        return data;
     }
 
-    public void setObject(T object) {
-        this.object = object;
+    public void setData(T data) {
+        this.data = data;
     }
-
 }
